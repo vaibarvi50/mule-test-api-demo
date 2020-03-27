@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+
+ 	<sub-flow name="custom-demo-flow">
+        <logger level="INFO" message="API Call Invoked " doc:name="Logger"/>
+        <expression-filter expression="#[message.inboundProperties['http.query.params']['vaibhav'] contains 'vaibhav']" doc:name="Expression"/>
+        <set-payload value="{
+   				&quot;message&quot;: &quot;test called&quot;
+			}" doc:name="Set Payload" mimeType="application/json"/>
+        <logger message="test called " level="INFO" doc:name="Logger"/>
+        <set-property propertyName="http.status" value="200" doc:name="Property"/>
+        
+    </sub-flow>
+
+
+
+</mule>
